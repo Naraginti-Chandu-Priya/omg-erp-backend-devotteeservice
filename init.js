@@ -10,10 +10,16 @@ console.log(`\x1b[32m
 
 const reader = readline.createInterface({
   input: process.stdin,
-  output: process.stdout,
+  output: process.stdout
 });
 
-const files = ['package.json', 'package-lock.json', 'Dockerfile', '.env.example', 'src/app/createServer.ts'];
+const files = [
+  'package.json',
+  'package-lock.json',
+  'Dockerfile',
+  '.env.example',
+  'src/app/createServer.ts'
+];
 
 reader.question('Project name (ex: user-service): ', (name) => {
   reader.question('Description: ', (description) => {

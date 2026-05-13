@@ -12,10 +12,9 @@ import {
   PUBSUB_PUBLISH_ERROR
 } from './publishTest.const';
 
-export const publishTestHandler: EndpointHandler<EndpointAuthType.NONE> = async (
-  req: EndpointRequestType[EndpointAuthType.NONE],
-  res: Response
-) => {
+export const publishTestHandler: EndpointHandler<
+  EndpointAuthType.NONE
+> = async (req: EndpointRequestType[EndpointAuthType.NONE], res: Response) => {
   // Check if Pub/Sub is enabled
   if (process.env.ENABLE_PUBSUB?.toLowerCase() !== 'true') {
     res.status(400).json({
@@ -43,10 +42,7 @@ export const publishTestHandler: EndpointHandler<EndpointAuthType.NONE> = async 
   };
 
   try {
-    await PubSub.publish(
-      process.env.PUBSUB_TOPIC,
-      payload
-    );
+    await PubSub.publish(process.env.PUBSUB_TOPIC, payload);
 
     res.json({
       success: true,

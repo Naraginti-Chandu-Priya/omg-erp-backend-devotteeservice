@@ -25,9 +25,9 @@ createServer()
   .init()
   .then(async () => {
     reportInfo('HTTP server started successfully');
-   
+
     const shouldInitDb = process.env.RUN_DB_MIGRATION?.toLowerCase() === 'true';
-    
+
     if (shouldInitDb) {
       reportInfo('Database initialization enabled');
       try {
@@ -44,7 +44,9 @@ createServer()
         process.exit(1);
       }
     } else {
-      reportInfo('Database initialization skipped (RUN_DB_MIGRATION not set to true)');
+      reportInfo(
+        'Database initialization skipped (RUN_DB_MIGRATION not set to true)'
+      );
     }
 
     // Initialize Pub/Sub after server is running
@@ -55,7 +57,7 @@ createServer()
       reportError(pubsubError);
     }
   })
-  .catch((error) => {  
+  .catch((error) => {
     reportError('Failed to start HTTP server');
     reportError(error);
     process.exit(1);

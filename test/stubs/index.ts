@@ -40,56 +40,59 @@ export function createMockResponse() {
     sendStatus: sinon.stub().returnsThis(),
     setHeader: sinon.stub().returnsThis()
   };
-  
+
   res.status.callsFake((code: number) => {
     res.statusCode = code;
     return res;
   });
-  
+
   return res;
 }
 
 /**
  * Stub database model methods
  */
-export function stubModelMethods<T>(Model: any, methods: {
-  findAll?: T[];
-  findOne?: T | null;
-  findByPk?: T | null;
-  create?: T;
-  update?: [number, T[]];
-  destroy?: number;
-  count?: number;
-}) {
+export function stubModelMethods<T>(
+  Model: any,
+  methods: {
+    findAll?: T[];
+    findOne?: T | null;
+    findByPk?: T | null;
+    create?: T;
+    update?: [number, T[]];
+    destroy?: number;
+    count?: number;
+  }
+) {
   const stubs: any = {};
-  
+
   if (methods.findAll !== undefined) {
     stubs.findAll = sinon.stub(Model, 'findAll').resolves(methods.findAll);
   }
-  
+
   if (methods.findOne !== undefined) {
     stubs.findOne = sinon.stub(Model, 'findOne').resolves(methods.findOne);
   }
-  
+
   if (methods.findByPk !== undefined) {
     stubs.findByPk = sinon.stub(Model, 'findByPk').resolves(methods.findByPk);
   }
-  
+
   if (methods.create !== undefined) {
     stubs.create = sinon.stub(Model, 'create').resolves(methods.create);
   }
-  
+
   if (methods.update !== undefined) {
     stubs.update = sinon.stub(Model, 'update').resolves(methods.update);
   }
-  
+
   if (methods.destroy !== undefined) {
     stubs.destroy = sinon.stub(Model, 'destroy').resolves(methods.destroy);
   }
-  
+
   if (methods.count !== undefined) {
     stubs.count = sinon.stub(Model, 'count').resolves(methods.count);
   }
-  
+
   return stubs;
 }

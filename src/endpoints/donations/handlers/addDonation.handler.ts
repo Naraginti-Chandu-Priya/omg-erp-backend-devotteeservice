@@ -5,9 +5,7 @@ import {
 } from 'node-server-engine';
 import { Donation } from 'db';
 import { nanoid } from 'nanoid';
-import {
-  ADD_DONATION_ERROR
-} from '../donations.const';
+import { ADD_DONATION_ERROR } from '../donations.const';
 
 export const addDonationHandler: EndpointHandler<
   EndpointAuthType.NONE

@@ -64,7 +64,7 @@ On top of this we have some specific requirements.
 
   ```javascript
   // Correct
-  import {readFileSync} from 'fs';
+  import { readFileSync } from 'fs';
   import fs from 'fs';
   // Incorrect
   const fs = require('fs');

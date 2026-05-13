@@ -6,11 +6,7 @@ import {
 } from 'node-server-engine';
 import { Response } from 'express';
 import { Pooja } from 'db';
-import {
-  UPDATE_POOJA_ERROR,
-  POOJA_NOT_FOUND,
-  UNAUTHORIZED_ACCESS
-} from '../pooja.const';
+import { UPDATE_POOJA_ERROR, POOJA_NOT_FOUND } from '../pooja.const';
 
 export const updatePoojaHandler: EndpointHandler<
   EndpointAuthType.NONE

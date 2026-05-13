@@ -7,14 +7,12 @@ import {
   HasOne
 } from 'sequelize-typescript';
 
-
 import { FamilyMembers } from './familymembers';
 import { ReminderPreference } from './reminderpreferences';
 import { CommunicationPreference } from './communicationpreference';
 import { Spiritualinformation } from './spiritualinformation';
 import { Donation } from './donations';
 import { PoojaSeva } from './poojaseva';
-
 
 @Table({ tableName: 'devotees', timestamps: true, underscored: true })
 export class Devotee extends Model {
@@ -87,10 +85,8 @@ export class Devotee extends Model {
   })
   membership_type?: 'Regular' | 'Silver' | 'Gold' | 'Platinum' | 'VIP';
 
-
   @Column({ type: DataType.UUID, allowNull: true })
   created_by?: string;
-
 
   @Column({ type: DataType.UUID, allowNull: true })
   updated_by?: string;
@@ -98,9 +94,10 @@ export class Devotee extends Model {
   @Column({ type: DataType.BOOLEAN, allowNull: false, defaultValue: false })
   is_deleted!: boolean;
 
-
-
-  @HasOne(() => Spiritualinformation, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
+  @HasOne(() => Spiritualinformation, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE'
+  })
   spiritual_profile!: Spiritualinformation;
 
   @HasOne(() => CommunicationPreference, {

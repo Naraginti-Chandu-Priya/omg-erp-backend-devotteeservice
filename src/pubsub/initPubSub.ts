@@ -6,13 +6,15 @@ let retryTimer: NodeJS.Timeout | null = null;
 function schedulePubSubRetry(attemptNumber: number): void {
   // Exponential backoff: 30s, 60s, 120s, 240s, capped at 300s
   const delayMs = Math.min(30000 * Math.pow(2, attemptNumber - 1), 300000);
-  reportInfo(`Scheduling Pub/Sub retry attempt ${attemptNumber + 1} in ${delayMs / 1000}s`);
+  reportInfo(
+    `Scheduling Pub/Sub retry attempt ${attemptNumber + 1} in ${delayMs / 1000}s`
+  );
   retryTimer = setTimeout(() => initPubSub(attemptNumber + 1), delayMs);
 }
 
 /**
  * Initialize Pub/Sub publishers and subscribers
- * 
+ *
  * This function sets up all Pub/Sub topics (publishers) and subscriptions (subscribers)
  * needed by the service. It should be called after the HTTP server is initialized.
  */

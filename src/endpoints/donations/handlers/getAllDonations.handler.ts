@@ -4,9 +4,7 @@ import {
   reportError
 } from 'node-server-engine';
 import { Donation, Devotee } from 'db';
-import {
-  ADD_DONATION_ERROR
-} from '../donations.const';
+import { ADD_DONATION_ERROR } from '../donations.const';
 
 export const getAllDonationsHandler: EndpointHandler<
   EndpointAuthType.NONE

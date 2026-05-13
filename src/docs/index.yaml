@@ -9,7 +9,7 @@ servers:
 security:
   - bearerAuth: []
   - staticAuth: []
-  
+
 components:
   securitySchemes:
     bearerAuth:

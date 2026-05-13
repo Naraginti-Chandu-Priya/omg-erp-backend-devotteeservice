@@ -9,7 +9,11 @@ import {
 
 import { Devotee } from './devotee';
 
-@Table({ tableName: 'communicationpreferences', timestamps: true, underscored: true })
+@Table({
+  tableName: 'communicationpreferences',
+  timestamps: true,
+  underscored: true
+})
 export class CommunicationPreference extends Model {
   @Column({
     type: DataType.UUID,

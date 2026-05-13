@@ -30,12 +30,18 @@ export const deleteDevoteeHandler: EndpointHandler<
       return;
     }
 
-    await Spiritualinformation.destroy({ where: { devotee_id: id }, transaction });
+    await Spiritualinformation.destroy({
+      where: { devotee_id: id },
+      transaction
+    });
     await CommunicationPreference.destroy({
       where: { devotee_id: id },
       transaction
     });
-    await ReminderPreference.destroy({ where: { devotee_id: id }, transaction });
+    await ReminderPreference.destroy({
+      where: { devotee_id: id },
+      transaction
+    });
     await FamilyMembers.destroy({ where: { devotee_id: id }, transaction });
 
     await Devotee.destroy({ where: { id }, transaction });

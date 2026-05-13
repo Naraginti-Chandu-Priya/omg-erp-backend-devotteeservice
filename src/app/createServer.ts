@@ -1,9 +1,14 @@
-import { Server, reportDebug, SecretManagerOptions } from 'node-server-engine';
+import {
+  Server,
+  reportDebug,
+  SecretManagerOptions,
+  Endpoint,
+  EndpointAuthType
+} from 'node-server-engine';
 import cookieParser from 'cookie-parser';
 import * as endpoints from '../endpoints';
 
-
-import express from 'express';
+import express, { RequestHandler } from 'express';
 import swaggerUi from 'swagger-ui-express';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -11,7 +16,10 @@ import yaml from 'js-yaml';
 
 const swaggerFilePath = path.resolve(__dirname, '../../docs/index.yaml');
 const swaggerContent = fs.readFileSync(swaggerFilePath, 'utf8');
-const swaggerDocument = yaml.load(swaggerContent) as Record<string, unknown>;
+const swaggerDocument = yaml.load(swaggerContent) as Record<
+  string,
+  string | number | boolean | object | null
+>;
 
 reportDebug.setNameSpace('devotee-service');
 
@@ -24,21 +32,23 @@ export function createServer(): Server {
     secrets: []
   };
 
+  const swaggerHandlers = swaggerUi.serve.map((handler) => ({
+    path: '/api-docs',
+    middleware: handler as RequestHandler
+  }));
+
   return new Server({
     globalMiddleware: [
       express.json(),
       express.urlencoded({ extended: true }),
       cookieParser(),
+      ...swaggerHandlers,
       {
         path: '/api-docs',
-        middleware: swaggerUi.serve
-      },
-      {
-        path: '/api-docs',
-        middleware: swaggerUi.setup(swaggerDocument) as any
+        middleware: swaggerUi.setup(swaggerDocument) as RequestHandler
       }
     ],
-    endpoints: Object.values(endpoints) as any,
+    endpoints: Object.values(endpoints) as Endpoint<EndpointAuthType>[],
     secretManager: secretManagerConfig
   });
 }

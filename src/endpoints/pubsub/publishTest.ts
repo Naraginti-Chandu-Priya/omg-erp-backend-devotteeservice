@@ -1,8 +1,4 @@
-import {
-  Endpoint,
-  EndpointMethod,
-  EndpointAuthType
-} from 'node-server-engine';
+import { Endpoint, EndpointMethod, EndpointAuthType } from 'node-server-engine';
 import { publishTestValidator } from './publishTest.validator';
 import { publishTestHandler } from './publishTest.handler';
 

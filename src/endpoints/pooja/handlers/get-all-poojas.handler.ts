@@ -10,8 +10,7 @@ import { GET_POOJA_ERROR } from '../pooja.const';
 
 export const getAllPoojasHandler: EndpointHandler<
   EndpointAuthType.NONE
-> = async (req: EndpointRequestType[EndpointAuthType.NONE], res: Response) => {
-
+> = async (_req: EndpointRequestType[EndpointAuthType.NONE], res: Response) => {
   try {
     const poojas = await Pooja.findAll();
     res.status(200).json({ data: poojas });

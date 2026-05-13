@@ -4,13 +4,18 @@ const namespace = '~~name~~:pubsub';
 
 /**
  * Sample handler for processing incoming Pub/Sub messages
- * 
+ *
  * @param message - The message payload
  * @param attributes - Message attributes/metadata
  * @param publishedAt - When the message was published
  */
+interface PubSubMessage {
+  type?: string;
+  [key: string]: string | number | boolean | object | null | undefined;
+}
+
 export async function handleSampleMessage(
-  message: any,
+  message: PubSubMessage,
   attributes: Record<string, string>,
   publishedAt: Date
 ): Promise<void> {
@@ -22,8 +27,10 @@ export async function handleSampleMessage(
 
   // Add your message processing logic here
   // Example: Process event, update database, trigger workflows, etc.
-  
-  reportInfo(`Pub/Sub message processed successfully: ${JSON.stringify(message)}`);
+
+  reportInfo(
+    `Pub/Sub message processed successfully: ${JSON.stringify(message)}`
+  );
 }
 
 /**
@@ -32,7 +39,7 @@ export async function handleSampleMessage(
  * with different subscriptions in initPubSub.ts
  */
 export async function handleAnotherMessageType(
-  message: any,
+  message: PubSubMessage,
   _attributes: Record<string, string>,
   _publishedAt: Date
 ): Promise<void> {

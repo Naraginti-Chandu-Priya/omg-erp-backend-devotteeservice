@@ -9,7 +9,11 @@ import {
 
 import { Devotee } from './devotee';
 
-@Table({ tableName: 'spiritualinformations', timestamps: true, underscored: true })
+@Table({
+  tableName: 'spiritualinformations',
+  timestamps: true,
+  underscored: true
+})
 export class Spiritualinformation extends Model {
   @Column({
     type: DataType.UUID,
