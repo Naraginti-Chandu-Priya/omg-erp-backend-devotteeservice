@@ -1,42 +1,44 @@
-import {Server, reportDebug, middleware, SecretManagerOptions} from 'node-server-engine';
-import * as endpoints from 'endpoints';
+import { Server, reportDebug, SecretManagerOptions } from 'node-server-engine';
+import cookieParser from 'cookie-parser';
+import * as endpoints from '../endpoints';
 
-reportDebug.setNameSpace('~~namespace~~');
 
-/** Initialize the server */
+import express from 'express';
+import swaggerUi from 'swagger-ui-express';
+import * as fs from 'fs';
+import * as path from 'path';
+import yaml from 'js-yaml';
+
+const swaggerFilePath = path.resolve(__dirname, '../../docs/index.yaml');
+const swaggerContent = fs.readFileSync(swaggerFilePath, 'utf8');
+const swaggerDocument = yaml.load(swaggerContent) as Record<string, unknown>;
+
+reportDebug.setNameSpace('devotee-service');
+
 export function createServer(): Server {
-  // Optional: Configure Secret Manager for production
-  // Uncomment and customize the secrets array based on your service needs
   const secretManagerConfig: SecretManagerOptions = {
     enabled: process.env.NODE_ENV === 'production',
     projectId: process.env.GCP_PROJECT_ID,
     cache: true,
     fallbackToEnv: true,
-    secrets: [
-      // Example: Load string secrets directly as environment variables
-      // 'SQL_PASSWORD',
-      // 'JWT_SECRET',
-      
-      // Example: Load file-based secrets (keys, certificates, etc.)
-      // {
-      //   name: 'PRIVATE_KEY',
-      //   type: 'file',
-      //   targetEnvVar: 'PRIVATE_KEY_PATH',
-      //   filename: 'private-key.pem'
-      // },
-      // {
-      //   name: 'JWKS',
-      //   type: 'file',
-      //   targetEnvVar: 'JWKS_PATH',
-      //   filename: 'jwks.json'
-      // }
-    ]
+    secrets: []
   };
 
   return new Server({
-    globalMiddleware: [middleware.swaggerDocs()],
-    endpoints: Object.values(endpoints),
-    // Uncomment to enable Secret Manager
-     secretManager: secretManagerConfig
+    globalMiddleware: [
+      express.json(),
+      express.urlencoded({ extended: true }),
+      cookieParser(),
+      {
+        path: '/api-docs',
+        middleware: swaggerUi.serve
+      },
+      {
+        path: '/api-docs',
+        middleware: swaggerUi.setup(swaggerDocument) as any
+      }
+    ],
+    endpoints: Object.values(endpoints) as any,
+    secretManager: secretManagerConfig
   });
 }

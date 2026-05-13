@@ -4,25 +4,29 @@ import tseslint from 'typescript-eslint';
 
 export default [
   { files: ['src/**/*.{js,mjs,cjs,ts}', 'test/**/*.{js,mjs,cjs,ts}'] },
-  { 
-    languageOptions: { 
+  {
+    languageOptions: {
       globals: { ...globals.node },
       parserOptions: {
         ecmaVersion: 2023,
         sourceType: 'module'
       }
-    } 
+    }
   },
   pluginJs.configs.recommended,
   { ignores: ['**/*.test.ts', '**/*.d.ts', 'dist/**', 'node_modules/**'] },
   ...tseslint.configs.recommended,
   {
     rules: {
-      '@typescript-eslint/no-explicit-any': 'warn',
-      '@typescript-eslint/no-unused-vars': ['error', { 
-        'argsIgnorePattern': '^_',
-        'varsIgnorePattern': '^_'
-      }]
+      '@typescript-eslint/no-explicit-any': 'error',
+      'no-console': 'error',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_'
+        }
+      ]
     }
   }
 ];
