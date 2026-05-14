@@ -13,7 +13,7 @@ import {
 } from './pooja.validator';
 
 export const createPoojaEndpoint = new Endpoint({
-  path: '/poojas',
+  path: '/poojasevas/poojas',
   method: EndpointMethod.POST,
   handler: createPoojaHandler,
   authType: EndpointAuthType.NONE,
@@ -21,7 +21,7 @@ export const createPoojaEndpoint = new Endpoint({
 });
 
 export const getAllPoojasEndpoint = new Endpoint({
-  path: '/poojas',
+  path: '/poojasevas/poojas',
   method: EndpointMethod.GET,
   handler: getAllPoojasHandler,
   authType: EndpointAuthType.NONE,
@@ -29,7 +29,7 @@ export const getAllPoojasEndpoint = new Endpoint({
 });
 
 export const getPoojaEndpoint = new Endpoint({
-  path: '/poojas/:id',
+  path: '/poojasevas/poojas/:id',
   method: EndpointMethod.GET,
   handler: getPoojaHandler,
   authType: EndpointAuthType.NONE,
@@ -37,7 +37,7 @@ export const getPoojaEndpoint = new Endpoint({
 });
 
 export const updatePoojaEndpoint = new Endpoint({
-  path: '/poojas/:id',
+  path: '/poojasevas/poojas/:id',
   method: EndpointMethod.PUT,
   handler: updatePoojaHandler,
   authType: EndpointAuthType.NONE,
@@ -45,7 +45,7 @@ export const updatePoojaEndpoint = new Endpoint({
 });
 
 export const deletePoojaEndpoint = new Endpoint({
-  path: '/poojas/:id',
+  path: '/poojasevas/poojas/:id',
   method: EndpointMethod.DELETE,
   handler: deletePoojaHandler,
   authType: EndpointAuthType.NONE,
