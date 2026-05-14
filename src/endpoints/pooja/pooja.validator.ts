@@ -25,6 +25,11 @@ export const createPoojaValidator: Schema = {
     exists: { errorMessage: 'Pooja duration is required' },
     isString: true,
     trim: true
+  },
+  temple_id: {
+    in: 'body',
+    optional: true,
+    isUUID: { errorMessage: 'Invalid temple ID' }
   }
 };
 
@@ -53,6 +58,11 @@ export const updatePoojaValidator: Schema = {
     optional: true,
     isString: true,
     trim: true
+  },
+  temple_id: {
+    in: 'body',
+    optional: true,
+    isUUID: { errorMessage: 'Invalid temple ID' }
   }
 };
 

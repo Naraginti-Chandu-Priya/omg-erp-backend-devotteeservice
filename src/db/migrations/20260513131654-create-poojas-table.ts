@@ -9,6 +9,11 @@ export async function up(queryInterface: QueryInterface): Promise<void> {
       allowNull: false
     },
 
+    temple_id: {
+      type: DataTypes.UUID,
+      allowNull: true
+    },
+
     pooja_name: {
       type: DataTypes.STRING,
       allowNull: false

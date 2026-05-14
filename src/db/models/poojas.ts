@@ -6,6 +6,16 @@ import { Table, Column, Model, DataType } from 'sequelize-typescript';
   underscored: true
 })
 export class Pooja extends Model {
+  @Column({
+    type: DataType.UUID,
+    defaultValue: DataType.UUIDV4,
+    primaryKey: true
+  })
+  declare id: string;
+
+  @Column({ type: DataType.UUID, allowNull: true })
+  temple_id?: string;
+
   @Column({ type: DataType.STRING, allowNull: false })
   pooja_name!: string;
 
