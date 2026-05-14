@@ -11,7 +11,8 @@ import { CREATE_POOJA_ERROR } from '../pooja.const';
 export const createPoojaHandler: EndpointHandler<
   EndpointAuthType.NONE
 > = async (req: EndpointRequestType[EndpointAuthType.NONE], res: Response) => {
-  const { pooja_name, pooja_type, pooja_price, pooja_duration, temple_id } = req.body;
+  const { pooja_name, pooja_type, pooja_price, pooja_duration, temple_id } =
+    req.body;
 
   try {
     const pooja = await Pooja.create({

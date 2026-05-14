@@ -12,7 +12,8 @@ export const updatePoojaHandler: EndpointHandler<
   EndpointAuthType.NONE
 > = async (req: EndpointRequestType[EndpointAuthType.NONE], res: Response) => {
   const { id } = req.params;
-  const { pooja_name, pooja_type, pooja_price, pooja_duration, temple_id } = req.body;
+  const { pooja_name, pooja_type, pooja_price, pooja_duration, temple_id } =
+    req.body;
 
   try {
     const pooja = await Pooja.findByPk(id);
